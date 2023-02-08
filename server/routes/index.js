@@ -12,6 +12,6 @@ router.get('/', async function(req, res, next) {
 router.get('/delete/:id',async (req,res,next)=>{
   console.log(req.params.id)
   await pool.query('DELETE FROM books WHERE id=?',[req.params.id])
-  res.redirect('/')
+  res.sendStatus(200)
 })
 module.exports = router;
