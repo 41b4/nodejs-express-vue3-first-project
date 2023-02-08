@@ -19,7 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/addbook', newbookRouter);
+app.use('/api/', indexRouter);
+app.use('/api/addbook', newbookRouter);
 
 module.exports = app;
