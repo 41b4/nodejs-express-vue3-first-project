@@ -8,4 +8,10 @@ router.get('/', async function(req, res, next) {
   res.json({ rows });
 });
 
+// DELETE home page
+router.get('/delete/:id',async (req,res,next)=>{
+  console.log(req.params.id)
+  await pool.query('DELETE FROM books WHERE id=?',[req.params.id])
+  res.redirect('/')
+})
 module.exports = router;

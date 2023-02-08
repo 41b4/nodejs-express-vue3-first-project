@@ -7,15 +7,13 @@
     </div>
     <p>Author: {{book.author}}</p>
     <p>Description: {{book.description}}</p>
-    <button>Delete</button>
+    <button @click="deleteBook(book.id)">Delete</button>
   </div>
 </section>
 </template>
 
 <script>
 // @ is an alias to /src
-const API_URL = "http://localhost:3000/"
-
 import axios from 'axios'
 
 export default {
@@ -27,14 +25,16 @@ export default {
     }
   },
   mounted(){
-    // fetch(API_URL).then(response=> response.json()).then(result=>{
-    //   this.books=result.rows
-    //   console.log(result.rows)
-    // })
-    axios.get(API_URL)
-    .then(response=>(this.books=response.data.rows))
+    axios.get("http://localhost:3000/")
+    .then(response=>(this.books=response.data.rows, console.log(response.data.rows)))
     .catch(error=>console.log(error))
-    
+  },
+  methods:{
+    deleteBook(index){
+      console.log(index)
+      axios.get("http://localhost:3000/delete/"+index)
+      window.location.reload()
+    }
   }
 }
 </script>
