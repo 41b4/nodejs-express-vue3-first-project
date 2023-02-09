@@ -11,6 +11,7 @@
         <input type="text" v-model="author" />
         <label>Description</label>
         <textarea type="text" v-model="description" />
+        <span>{{errormsg}}</span>
         <button @click="addBook()">Add new book</button>
       </div>
     </section>
@@ -29,11 +30,16 @@ export default {
       description: "",
       img: "",
       author: "",
+      errormsg:''
     };
   },
   methods: {
     addBook() {
-      axios
+      if(!this.title||!this.description||!this.img||!this.author){
+        this.errormsg='Please fill all spaces'
+      }else{
+        this.errormsg=''
+        axios
         .post("http://localhost:3000/api/addbook", {
           title: this.title,
           description: this.description,
@@ -50,6 +56,8 @@ export default {
         this.description= ""
         this.img= ""
         this.author= ""
+      }
+      
     },
   },
 };
@@ -82,6 +90,9 @@ export default {
       padding: 1rem
       width: 43rem
       height: 27rem
+      span
+        color: $orange
+        font-weight: 300
       label
         width: 80%
       input, textarea
